@@ -7,8 +7,12 @@
 #ifndef FUZZYPOINT
 #define FUZZYPOINT
 
+//统一设置数据点的维度和聚类数
+// #define DIMENSIONS (1 << 1)  //样本点维度为2
+// #define NUMCLUSTER (1 << 1)  //聚类中心数为2
 #define DIMENSIONS (1 << 1)
 #define NUMCLUSTER (1 << 1)
+
 #define UPPER 10000
 #define LOWER 0
 #define EPSILON 0.05

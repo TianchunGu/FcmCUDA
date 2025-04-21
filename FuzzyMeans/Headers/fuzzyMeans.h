@@ -8,8 +8,10 @@
 #define fuzzyMEANS 2
 #define FUZZINESS 4
 // do not go above 
+// 设置样本点数量
 #define NUMPOINTS (1 << 20)
 // Note that this is one
+// 迭代次数
 #define ITERATIONS 10
 
 /**
