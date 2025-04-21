@@ -1,7 +1,7 @@
 CC = gcc
 DEP = -lm
 
-all: clean main cuda mpi
+all: clean main cuda #mpi
 
 main:
 	gcc fuzzyMain.c -o fuzzyMain $(DEP)
@@ -9,8 +9,8 @@ main:
 cuda:
 	nvcc -Xcompiler -fopenmp -I "./inc" fuzzyMain.cu -o fuzzyCuda --gpu-architecture=compute_75
 
-mpi:
-	mpicc fuzzyMPIMain.c -o fuzzyMPI -lm
+# mpi:
+# 	mpicc fuzzyMPIMain.c -o fuzzyMPI -lm
 
 # Determine if windows or linux
 ifeq ($(OS),Windows_NT)
