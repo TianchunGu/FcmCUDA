@@ -105,4 +105,38 @@ void printAllFuzzyPoints(FuzzyPoint *data){
     printf("######################################################################################################\n");
 }
 
+/**
+ * 读取样本点数据
+ * @param fname 样本点数据文件路径
+ * @param data 样本点数据
+ * @param pointNum 样本点数量
+ * @param dimension 样本点维度
+ */
+ void readData(const char * fname, FuzzyPoint *data,int pointNum,int dimension){
+  FILE *csv_data = fopen(fname, "r");
+  if (!csv_data) {
+      printf("Error: Unable to open file for reading - %s\n", fname);
+      exit(1);
+  } else {
+      char line[8192];
+      printf("Open file successfully!\n");
+      // 读取标题行
+      fgets(line, sizeof(line), csv_data);
+      int i = 0;
+      while (fgets(line, sizeof(line), csv_data) && i < pointNum) {
+          char *token = strtok(line, ",");
+          int j = 0;
+          initProb(&data[i]);
+          while (token && j < dimension) {
+              data[i].values[j] = atof(token);
+              token = strtok(NULL, ",");
+              j++;
+          }
+          i++;
+      }
+      fclose(csv_data);
+      printf("Close file successfully!\n");
+  }
+}
+
 #endif

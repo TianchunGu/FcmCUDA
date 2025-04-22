@@ -12,6 +12,7 @@
 #include <helper_functions.h>    // includes cuda.h and cuda_runtime_api.h
 #include <helper_cuda.h>         // helper functions for CUDA error check
 
+// 设置CUDA运行时的线程数
 #define NUMTHREADS 1024
 
 void validateData(FuzzyPoint *data1, FuzzyPoint *data2, int size)
@@ -42,14 +43,18 @@ void validateData(FuzzyPoint *data1, FuzzyPoint *data2, int size)
 int main()
 {   
     //Create points
+    // 随机化聚类中心（无需修改）
     FuzzyPoint *kPoints = (FuzzyPoint *)malloc(NUMCLUSTER * sizeof(FuzzyPoint));
     FuzzyPoint *kPointsTemp = (FuzzyPoint *)malloc(NUMCLUSTER * sizeof(FuzzyPoint));
     initCentroids(kPoints);
     memcpy(kPointsTemp, kPoints, NUMCLUSTER * sizeof(FuzzyPoint));
 
+    // 读取样本点
     FuzzyPoint *data = (FuzzyPoint *)malloc(NUMPOINTS * sizeof(FuzzyPoint));
     FuzzyPoint *dataTemp = (FuzzyPoint *)malloc(NUMPOINTS * sizeof(FuzzyPoint));
-    initAllFuzzyPoints(data);
+    // initAllFuzzyPoints(data);
+    // 修改数据集后，记得修改样本点个数、维度、聚类中心数
+    readData("/home/hgl/workspace/datasets/BigData/dataSet/MNIST.csv",data,NUMPOINTS,DIMENSIONS);
     memcpy(dataTemp, data, NUMPOINTS * sizeof(FuzzyPoint));
 
     //Serial
